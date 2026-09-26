@@ -1,56 +1,74 @@
-# Chains - Skillchains reborn
-### Active Battle Skillchain Display.
+# Chains - Skillchains Reborn
 
-**Designed for and tested on retail.**
+Active Battle Skillchain Display for Ashita v4.
 
-Displays a text object containing skillchain elements resonating on current target, timer for skillchain window and a list of weapon skills that can skillchain based on the weapon you have currently equipped.
+Originally based on the `skillchains` addon by **Ivaar** (Ashita v3) and modernized by **NerfOnline / Sippius**.  
+This edition features a completely overhauled dark HUD layout with hierarchical skillchain trees, visual timing gauges, and full Japanese property support tailored for private servers (tested on HorizonXI) and retail.
 
-Chains is based on the skillchains addon by Ivaar for Ashita-v3. It has mostly been recoded for Ashita-v4 while maintaining the same functionality.
+---
 
-### Commands
-The following commands may be used to adjust the window position.
+## Key Features & UI Improvements
 
-    /chains visible       -- displays text box - click and drag it to desired location
+- **Streamlined Dark HUD**:
+  - Semi-transparent dark palette with soft-rounded corners (6px).
+  - Clear state headers displaying action phase (`ACT`, `WAIT`, `BURST`), timing, and step count.
+- **Fixed 7-Block Timing Slider**:
+  - Displays remaining skillchain window duration via a visual block countdown gauge.
+  - Linear 1-second countdown for `WAIT` delays and proportional slide decay for `ACT` windows.
+- **Hierarchical Tree View**:
+  - Weaponskills and spells grouped cleanly by resulting skillchain property.
+  - Indented structure for fast parent-child visual navigation during combat.
+- **Bilingual & Japanese Property Support**:
+  - Japanese skillchain properties (e.g., `核熱`, `衝撃`) highlighted with distinct elemental colors alongside subdued English labels (`[Fusion]`, `[Reverberation]`).
+  - Magic Burst (MB) affinities tokenized alongside the starter skill.
+- **HorizonXI Compatibility**:
+  - Packet handling and delay calculations adjusted and tested for classic/private server environments (including Pet, BLU, and SCH actions).
 
-    /chains move <x> <y>  -- reposition the window to the defined x, y coordinates
+---
 
-    /chains scale <value> -- set font scale
+## Recommended Font
 
-The following commands toggle the display information.
+For optimal alignment and readability, **`MyricaM M`** (or `Myrica M`) is strongly recommended.  
+If installed in Windows (`C:\Windows\Fonts`), Chains will automatically load it with full Japanese glyph support.
 
-    /chains color   -- colorize properties and elements
+---
 
-    /chains pet     -- smn and bst pet skills
+## Commands
 
-    /chains spell   -- sch immanence and blue magic spells
+### Window Positioning & Display
+- `/chains visible` — Toggle preview window with drag handle to position on screen.
+- `/chains test` — Toggle test dummy skillchain preview.
+- `/chains direction` — Toggle anchor direction (`top` / `bottom`).
+- `/chains reset` — Reset window position to default coordinates.
 
-    /chains weapon  -- weapon skills
+### Content Toggles
+- `/chains color` — Toggle colorized properties and elements.
+- `/chains weapon` — Toggle weaponskill suggestions.
+- `/chains spell` — Toggle SCH Immanence and BLU magic spells.
+- `/chains pet` — Toggle SMN and BST pet skills.
 
-### Notable features that have changed
-- Display configuration is not currently stored per job and not all options are supported.
-- Information is displayed through IMGUI instead of a font object.
-- BLU and SCH spells only display when the associated abilities are active.
-- Skillchains are calculated on each render cycle for the active target rather than once for each target. This allows for real time updates based on active abilities and equipped weapon at the cost of additional workload.
-- Because the addon has been recoded and logic changed, it may not act exactly the same.
+---
 
-### Noteable features that are the same
-- Display format (with and without color)
-- Support for spells under Immanence, Chain Affinity and Azure Lore
-- Support for Pet and NPC weaponskills
-- Support for Aeonic weapons and ultimate skillchains (limited testing)
+## Original Features & Heritage
 
-### Known Issues/limitations
-- Chain Affinity only works with BLU main
-- Azure Lore duration is hard coded to 30 seconds (no check for relic hands)
-- Cannot detect when another player cancels their spell abilities
-- Aeonic testing is limited due to lack of weapon to test with
+- **IMGUI-Based Rendering**: Real-time recalculation per render frame based on equipped gear and active buffs.
+- **Ability Context Awareness**: BLU and SCH spells display dynamically when corresponding abilities (Immanence, Chain Affinity, Azure Lore) are active.
+- **Pet & NPC WS Support**: Tracks avatars, automatons, and party skills.
+- **Aeonic Weapon Support**: Logic included for ultimate skillchains (Radiance/Umbra).
 
-### Possible future ehancements
-- Improve display configuration and re-implement some/all of the previous options
-- Add support for element images in addition to or in place of element/property text names
-- Add support for Chain Affinity with BLU as subjob
+---
 
-### Acknowledgments
-All credit goes to Ivaar for the original skillchains implementation which was used as the tempalte for how to accomplish the desired results and how to deal with some of the corner cases.
+## Known Issues & Limitations
 
-Special thanks to Atom0s and Thorny. Many of their addons are used as examples of how to accomplish various tasks.
+- Chain Affinity requires BLU main for full buff tracking.
+- Azure Lore duration assumes standard 30-second duration without relic hand adjustment.
+- Cannot automatically detect when another player manually cancels an ability buff.
+
+---
+
+## Acknowledgments & Credits
+
+- **Ivaar**: Original author of the `skillchains` addon for Ashita v3.
+- **Sippius & NerfOnline**: Ported and restructured core logic for Ashita v4.
+- **Atom0s & Thorny**: Foundation libraries, Ashita v4 framework, and coding examples.
+- **purya-mochi**: HUD overhaul, 7-block slider gauge implementation, tree layout, and Japanese localization.
